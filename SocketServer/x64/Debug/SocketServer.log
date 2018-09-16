@@ -1,0 +1,3 @@
+﻿  SocketServer.cpp
+d:\developer\code\x-plane\socketapplication\socketserver\socketserver.cpp(102): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  SocketServer.vcxproj -> D:\Developer\code\x-plane\SocketApplication\x64\Debug\SocketServer.exe

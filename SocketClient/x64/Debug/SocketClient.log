@@ -1,0 +1,5 @@
+﻿  pch.cpp
+  SocketClient.cpp
+d:\developer\code\x-plane\socketapplication\socketclient\socketclient.cpp(97): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+d:\developer\code\x-plane\socketapplication\socketclient\socketclient.cpp(117): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  SocketClient.vcxproj -> D:\Developer\code\x-plane\SocketApplication\x64\Debug\SocketClient.exe
