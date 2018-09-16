@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
 	SOCKET master, new_socket, client_socket[30], s;
 	struct sockaddr_in server, address;
 	int max_clients = 30, activity, addrlen, i, valread;
-	const char *message = "ECHO Daemon v1.0 \r\n";
+	const char *message = "ECHO_from_Server\r\n";
 
 	//size of our receive buffer, this is string length.
 	int MAXRECV = 1024;
