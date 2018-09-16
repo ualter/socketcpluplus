@@ -1,1 +1,3 @@
-﻿  SocketApplication.vcxproj -> d:\Developer\code\x-plane\SocketApplication\Debug\SocketApplication.exe
+﻿  pch.cpp
+  SocketApplication.cpp
+  SocketApplication.vcxproj -> d:\Developer\code\x-plane\SocketApplication\Debug\SocketApplication.exe
