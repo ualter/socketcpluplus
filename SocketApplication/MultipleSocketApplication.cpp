@@ -4,6 +4,7 @@
 #include<stdio.h>
 #define _WINSOCK_DEPRECATED_NO_WARNINGS
 #include<winsock2.h>
+#include <sstream>
 #pragma comment(lib,"ws2_32.lib") //Winsock Library
 
 
@@ -141,14 +142,7 @@ int main(int argc, char *argv[])
 				//Check if it was for closing , and also read the incoming message
 				//recv does not place a null terminator at the end of the string (whilst printf %s assumes there is one).
 				//valread = recv(s, buffer, MAXRECV, 0);
-				do  {
-					valread = recv(s, buffer, MAXRECV, 0);
-					if (valread > 0) {
-						buffer[valread] = '\0';
-						printf("%s:%d - %s \n", inet_ntoa(address.sin_addr), ntohs(address.sin_port), buffer);
-						send(s, buffer, valread, 0);
-					}
-				} while (valread > 0);
+				valread = recv(s, buffer, MAXRECV, 0);
 
 				if (valread == SOCKET_ERROR)
 				{
@@ -182,8 +176,29 @@ int main(int argc, char *argv[])
 				{
 					//add null character, if you want to use with printf/puts or other string handling functions
 					buffer[valread] = '\0';
-					printf("%s:%d - %s \n", inet_ntoa(address.sin_addr), ntohs(address.sin_port), buffer);
-					send(s, buffer, valread, 0);
+					printf("Message received: %s:%d - %s \n", inet_ntoa(address.sin_addr), ntohs(address.sin_port), buffer);
+					//send(s, buffer, valread, 0);
+
+					std::string response = "response";
+					std::stringstream wsss;
+					wsss << "HTTP/1.1 200 OK\r\n"
+						<< "Connection: keep-alive\r\n"
+						<< "Content-Type: image/x-icon\r\n"
+						<< "Content-Length: " << response.length() << "\r\n"
+						<< "\r\n";
+					std::string headers = wsss.str();
+					int datalen = headers.size();
+					int numSent;
+					char *pdata = NULL;
+					while (datalen > 0) {
+						numSent = send(s, headers.c_str(), headers.length(), 0);
+						if (numSent == -1) {
+							int error_code = WSAGetLastError();
+							printf("recv failed with error code : %d", error_code);
+						}
+						pdata += numSent;
+						datalen -= numSent;
+					}
 				}
 			}
 		}
@@ -191,6 +206,25 @@ int main(int argc, char *argv[])
 
 	closesocket(s);
 	WSACleanup();
+
+	return 0;
+}
+
+int sendData(int sckt, const char *data, int datalen)
+{
+	const char *pdata = data;
+	int numSent;
+
+	// send() can send fewer bytes than requested,
+	// so call it in a loop until the specified data
+	// has been sent in full...
+
+	while (datalen > 0) {
+		numSent = send(sckt, pdata, datalen, 0);
+		if (numSent == -1) return -1;
+		pdata += numSent;
+		datalen -= numSent;
+	}
 
 	return 0;
 }
