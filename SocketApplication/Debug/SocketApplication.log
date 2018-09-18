@@ -1,1 +1,4 @@
-﻿  SocketApplication.vcxproj -> d:\Developer\code\x-plane\SocketApplication\Debug\SocketApplication.exe
+﻿  pch.cpp
+  SocketApplication.cpp
+d:\developer\code\x-plane\socketapplication\socketapplication\socketapplication.cpp(18): warning C4101: 'message': unreferenced local variable
+  SocketApplication.vcxproj -> d:\Developer\code\x-plane\SocketApplication\Debug\SocketApplication.exe
