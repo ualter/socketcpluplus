@@ -140,7 +140,15 @@ int main(int argc, char *argv[])
 
 				//Check if it was for closing , and also read the incoming message
 				//recv does not place a null terminator at the end of the string (whilst printf %s assumes there is one).
-				valread = recv(s, buffer, MAXRECV, 0);
+				//valread = recv(s, buffer, MAXRECV, 0);
+				do  {
+					valread = recv(s, buffer, MAXRECV, 0);
+					if (valread > 0) {
+						buffer[valread] = '\0';
+						printf("%s:%d - %s \n", inet_ntoa(address.sin_addr), ntohs(address.sin_port), buffer);
+						send(s, buffer, valread, 0);
+					}
+				} while (valread > 0);
 
 				if (valread == SOCKET_ERROR)
 				{
