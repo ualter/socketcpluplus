@@ -29,7 +29,9 @@ public:
 	void stop();
 	void broadcast(string message);
 	void on_open(websocketpp::connection_hdl hdl);
+	void on_close(websocketpp::connection_hdl hdl);
 	void on_message(websocketpp::connection_hdl hdl, message_ptr msg);
+	connection_data& get_data_from_hdl(websocketpp::connection_hdl hdl);
 private:
 	int port;
 	server wsServer;

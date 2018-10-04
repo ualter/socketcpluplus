@@ -10,17 +10,50 @@ SocketServer::~SocketServer() {
 }
 
 void SocketServer::broadcast(string message) {
+	for (auto const& pair : this->connections) {
+		websocketpp::connection_hdl connection = pair.first;
 
+		try {
+			this->wsServer.send(connection, message, websocketpp::frame::opcode::text);
+		}
+		catch (websocketpp::exception const & e) {
+			std::cout << "Failed send message to client..: " << "(" << e.what() << ")" << std::endl;
+		}
+	}
 }
 
 void SocketServer::on_open(websocketpp::connection_hdl hdl) {
 	connection_data data;
 
 	data.sessionid = this->sessionId++;
-	data.name = "Connection";
+	data.name = "Connection " + std::to_string(data.sessionid);
+
+	std::cout << "Open connection with " << data.name
+		<< " with sessionid " << data.sessionid << std::endl;
 
 	this->connections[hdl] = data;
 	this->arraySocketClients.push_back(hdl);
+}
+
+void SocketServer::on_close(websocketpp::connection_hdl hdl) {
+	connection_data& data = get_data_from_hdl(hdl);
+
+	std::cout << "Closing connection " << data.name
+		<< " with sessionid " << data.sessionid << std::endl;
+
+	this->connections.erase(hdl);
+}
+
+connection_data& SocketServer::get_data_from_hdl(websocketpp::connection_hdl hdl) {
+	auto it = this->connections.find(hdl);
+
+	if (it == this->connections.end()) {
+		// this connection is not in the list. This really shouldn't happen
+		// and probably means something else is wrong.
+		throw std::invalid_argument("No data avaliable for session");
+	}
+
+	return it->second;
 }
 
 void SocketServer::on_message(websocketpp::connection_hdl hdl, message_ptr msg) {
@@ -48,10 +81,9 @@ void SocketServer::start() {
 		this->wsServer.clear_access_channels(websocketpp::log::alevel::none);
 
 		this->wsServer.init_asio();
-		//this->wsServer.set_open_handler(bind(&on_open::on_open, this, ::_1));
-		//this->wsServer.set_message_handler(bind(&on_message, &this->wsServer, &this->arraySocketClients, ::_1, ::_2));
+		this->wsServer.set_open_handler(bind(&SocketServer::on_open, this, ::_1));
 		this->wsServer.set_message_handler(bind(&SocketServer::on_message, this, ::_1, ::_2));
-		//this->wsServer.set_close_handler(bind(&print_server::on_close, this, ::_1));
+		this->wsServer.set_close_handler(bind(&SocketServer::on_close, this, ::_1));
 		this->wsServer.listen(this->port);
 
 		cout << "Listening on " << this->port << "..." << std::endl;

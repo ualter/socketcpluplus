@@ -1,3 +1,4 @@
+#pragma warning(disable: 4244)
 
 #include "pch.h"
 #include "SocketServer.h"
@@ -13,15 +14,23 @@ int main(int argc, char *argv[])
 	SocketServer* server = new SocketServer(9002);
 	std::thread threadTaskSocketServer(taskSocketServer, server);
 
-	// Wait for 60 seconds
+	// Let the Server work for 180 seconds
 	std::clock_t start;
 	double duration;
 	start = std::clock();
+	int interval = 10;
 	while (TRUE) {
 		duration = (std::clock() - start) / (double)CLOCKS_PER_SEC;
 		//cout << "Time... " << duration << "..." << std::endl;
-		if ( duration > 60)
-			 break;
+		double p1 = duration / interval;
+		int    p2 = duration / interval;
+		if ( (p1*interval) == (p2*interval) ) {
+			server->broadcast("Hello from Server");
+		}
+
+		if (duration > 180) {
+			break;
+		}
 	}
 
 	// Stop Server
@@ -29,6 +38,5 @@ int main(int argc, char *argv[])
 	server->stop();
 
 	threadTaskSocketServer.join();
-
 	return 0;
 }
