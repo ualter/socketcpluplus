@@ -1,14 +1,18 @@
-﻿  pch.cpp
-  MultipleSocketApplication.cpp
-d:\developer\apps\vcpkg\installed\x64-windows\include\websocketpp\frame.hpp(831): warning C4267: '=': conversion from 'size_t' to 'uint32_t', possible loss of data
-d:\developer\apps\vcpkg\installed\x64-windows\include\websocketpp\common\md5.hpp(367): warning C4267: '+=': conversion from 'size_t' to 'websocketpp::md5::md5_word_t', possible loss of data
-d:\developer\apps\vcpkg\installed\x64-windows\include\websocketpp\sha1\sha1.hpp(176): warning C4267: '=': conversion from 'size_t' to 'unsigned int', possible loss of data
-d:\developer\code\x-plane\socketapplication\socketapplication\multiplesocketapplication.cpp(26): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-  SocketServer.cpp
-d:\developer\apps\vcpkg\installed\x64-windows\include\websocketpp\frame.hpp(831): warning C4267: '=': conversion from 'size_t' to 'uint32_t', possible loss of data
-d:\developer\apps\vcpkg\installed\x64-windows\include\websocketpp\common\md5.hpp(367): warning C4267: '+=': conversion from 'size_t' to 'websocketpp::md5::md5_word_t', possible loss of data
-d:\developer\apps\vcpkg\installed\x64-windows\include\websocketpp\sha1\sha1.hpp(176): warning C4267: '=': conversion from 'size_t' to 'unsigned int', possible loss of data
-  Generating code
-  All 6054 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
-  Finished generating code
-  SocketApplication.vcxproj -> d:\Developer\code\x-plane\SocketApplication\x64\Release\SocketApplication.exe
+﻿  MultipleSocketApplication.cpp
+d:\developer\apps\vcpkg\installed\x64-windows\include\websocketpp\frame.hpp(831): warning C4267: '=': conversión de 'size_t' a 'uint32_t'; posible pérdida de datos
+d:\developer\apps\vcpkg\installed\x64-windows\include\websocketpp\common\md5.hpp(367): warning C4267: '+=': conversión de 'size_t' a 'websocketpp::md5::md5_word_t'; posible pérdida de datos
+d:\developer\apps\vcpkg\installed\x64-windows\include\websocketpp\sha1\sha1.hpp(176): warning C4267: '=': conversión de 'size_t' a 'unsigned int'; posible pérdida de datos
+d:\developer\code\x-plane\socketapplication\socketapplication\multiplesocketapplication.cpp(39): warning C4244: '=': conversión de 'double' a 'int'; posible pérdida de datos
+d:\developer\code\x-plane\socketapplication\socketapplication\multiplesocketapplication.cpp(43): warning C4244: 'inicializando': conversión de 'float' a 'int'; posible pérdida de datos
+d:\developer\code\x-plane\socketapplication\socketapplication\multiplesocketapplication.cpp(45): warning C4244: 'inicializando': conversión de 'float' a 'int'; posible pérdida de datos
+d:\developer\code\x-plane\socketapplication\socketapplication\multiplesocketapplication.cpp(47): warning C4244: 'inicializando': conversión de 'float' a 'int'; posible pérdida de datos
+d:\developer\code\x-plane\socketapplication\socketapplication\multiplesocketapplication.cpp(210): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+d:\developer\code\x-plane\socketapplication\socketapplication\multiplesocketapplication.cpp(211): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+d:\developer\code\x-plane\socketapplication\socketapplication\multiplesocketapplication.cpp(314): warning C4477: 'printf' : la cadena de formato '%s' requiere un argumento de tipo 'char *', pero el argumento variádico 1 tiene el tipo 'std::string'
+d:\developer\code\x-plane\socketapplication\socketapplication\multiplesocketapplication.cpp(314): warning C4477: 'printf' : la cadena de formato '%s' requiere un argumento de tipo 'char *', pero el argumento variádico 2 tiene el tipo 'std::string'
+  Generando código
+  1 of 958 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  Generación de código finalizada
+  SocketApplication.vcxproj -> D:\Developer\code\x-plane\SocketApplication\x64\Release\SocketApplication.exe
